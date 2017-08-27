@@ -4,7 +4,7 @@ describe("Mutability", function() {
     var aPerson = {firstname: "John", lastname: "Smith" };
     aPerson.firstname = "Alan";
 
-    expect(aPerson.firstname).toBe(FILL_ME_IN);
+    expect(aPerson.firstname).toBe("Alan");
   });
 
   it("Constructor를 이용하여 만든 object의 property도 수정 가능합니다.", function () {
@@ -16,7 +16,7 @@ describe("Mutability", function() {
     var aPerson = new Person ("John", "Smith");
     aPerson.firstname = "Alan";
 
-    expect(aPerson.firstname).toBe(FILL_ME_IN);
+    expect(aPerson.firstname).toBe("Alan");
   });
 
   it("prototype의 method도 수정 가능합니다.", function () {
@@ -30,15 +30,17 @@ describe("Mutability", function() {
     };
 
     var aPerson = new Person ("John", "Smith");
-    expect(aPerson.getFullName()).toBe(FILL_ME_IN);
+    expect(aPerson.getFullName()).toBe("John Smith");
 
     aPerson.getFullName = function () {
       return this.lastname + ", " + this.firstname;
     };
 
     // 어떻게 될까요?
-    expect(aPerson.getFullName()).toBe(FILL_ME_IN);
+    expect(aPerson.getFullName()).toBe("Smith, John");
   });
+    
+/********** scope 재확인 **********/    
 
   it("Constructor 함수속의 변수들은 해당 scope에서만 읽을 수 있습니다.", function () {
     function Person(firstname, lastname)
@@ -55,15 +57,15 @@ describe("Mutability", function() {
     aPerson.lastname = "Andrews";
     aPerson.fullName = "Penny Andrews";
 
-    expect(aPerson.getFirstName()).toBe(FILL_ME_IN);
-    expect(aPerson.getLastName()).toBe(FILL_ME_IN);
-    expect(aPerson.getFullName()).toBe(FILL_ME_IN);
+    expect(aPerson.getFirstName()).toBe("John");
+    expect(aPerson.getLastName()).toBe("Andrews");
+    expect(aPerson.getFullName()).toBe("John Andrews");
 
     aPerson.getFullName = function () {
       return aPerson.lastname + ", " + aPerson.firstname;
     };
 
-    expect(aPerson.getFullName()).toBe(FILL_ME_IN);
+    expect(aPerson.getFullName()).toBe("Andrews, Penny");
   });
 
 });
